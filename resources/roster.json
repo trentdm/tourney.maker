@@ -1,0 +1,18 @@
+{
+  "players" : [
+    {"name":"Kalpesh Shah", "skill":3},
+    {"name":"Larry Ward", "skill":3},
+    {"name":"Trent Miller", "skill":3},
+    {"name":"Katrina Brinkley", "skill":2},
+    {"name":"Dan Doepner", "skill":2},
+    {"name":"Kevin Dahl", "skill":2},
+    {"name":"Doug Nufer", "skill":1},
+    {"name":"Bill Schaefermeyer", "skill":3},
+    {"name":"James Morris", "skill":3},
+    {"name":"Justin Long", "skill":3},
+    {"name":"Joe Au", "skill":2},
+    {"name":"Joseph Hoyal", "skill":2},
+    {"name":"Eric Prusse", "skill":2},
+    {"name":"Maria Bates", "skill":1}
+  ]
+}
