@@ -23,7 +23,7 @@ class TestMatcher(unittest.TestCase):
                     ]
                   }
     roster = Roster(roster_data)
-    self.tourney = matcher.get_tournament(roster, 2)
+    self.tourney = matcher.get_tournament(roster)
 
   def tearDown(self):
     self.tourney = None
@@ -32,4 +32,4 @@ class TestMatcher(unittest.TestCase):
     self.assertEqual(21, self.tourney.get_count())
 
   def test_tourney_has_match(self):
-    self.assertEqual({}, self.tourney.get_matches()[0])
+    self.assertEqual("fooId", self.tourney.get_matches()[0].id)

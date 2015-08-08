@@ -10,3 +10,7 @@ class Roster(object):
 
   def get_count(self):
     return len(self.players)
+
+  def get_division_peers(self, player):
+    flt = lambda p: p.division == player.division and p.name != player.name
+    return filter(flt, self.players)
