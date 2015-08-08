@@ -1,9 +1,9 @@
 import unittest
-import read
+import reader
 
 class TestRead(unittest.TestCase):
   def setUp(self):
-    self.roster = read.get_roster('resources/test_data.json')
+    self.roster = reader.get_roster('resources/test_data.json')
 
   def tearDown(self):
     self.roster = None
@@ -16,3 +16,6 @@ class TestRead(unittest.TestCase):
 
   def test_player_skill(self):
     self.assertEqual(3, self.roster.players[0].skill)
+
+  def test_player_division(self):
+    self.assertEqual("West", self.roster.players[0].division)

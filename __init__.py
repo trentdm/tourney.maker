@@ -1,3 +1,3 @@
-import read
+import reader
 
-roster = read.get_roster('resources\\roster.json')
+roster = reader.get_roster('resources\\roster.json')
