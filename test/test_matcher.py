@@ -23,13 +23,21 @@ class TestMatcher(unittest.TestCase):
                     ]
                   }
     roster = Roster(roster_data)
-    self.matches = matcher.get_tournament_matches(roster)
+    self.teams = matcher.get_teams(roster)
+    self.matches = matcher.get_matches(self.teams)
+    self.optimized_matches = matcher.get_tournament_matches(roster)
 
   def tearDown(self):
     self.tourney = None
 
+  def test_team_count(self):
+    self.assertEqual(42, len(self.teams))
+
   def test_match_count(self):
-    self.assertEqual(21, len(self.matches))
+    self.assertEqual(441, len(self.matches))
+
+  def test_optimized_match_count(self):
+    self.assertEqual(21, len(self.optimized_matches))
 
   def test_tourney_has_match(self):
-    self.assertEqual("fooId", self.matches[0].id)
+    self.assertEqual("Bill SchaefermeyerJames MorrisKalpesh ShahLarry Ward", self.matches[0].id)

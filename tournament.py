@@ -23,7 +23,7 @@ class Match(object):
     self.id = ''.join([team.id for team in sorted_teams])
 
   def set_skill_difference(self):
-    self.skill_difference = self.teams[0].skill - self.teams[1].skill
+    self.skill_difference = self.teams[0].get_skill() - self.teams[1].get_skill()
 
   def get_id(self):
     return self.id

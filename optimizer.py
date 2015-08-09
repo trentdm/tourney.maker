@@ -1,31 +1,46 @@
+import math
+
 def get_optimized_matches(matches):
   optimized_matches = []
-  current_skill_difference = 0
+  match_limit = get_match_limit(matches)
   player_game_limit = get_player_game_limit(matches)
   player_game_counts = get_player_game_counts(matches)
 
-  for match in matches:
-    if(is_current_skill_diff(match, current_skill_difference)
-       and is_unique_match(optimized_matches, match)
-       and players_not_over_assigned(match, player_game_counts, player_game_limit)):
+  for current_skill_difference in range(match_limit):
+    for match in matches:
+      if(is_current_skill_diff(match, current_skill_difference)
+         and is_unique_match(optimized_matches, match)
+         and players_not_over_assigned(match, player_game_counts, player_game_limit)):
 
-      optimized_matches.append(match)
+        increment_game_counts(match, player_game_counts)
+        optimized_matches.append(match)
 
-      for team in match.teams:
-        for player in team.players:
-          player_game_counts[player.name] += 1
+        if(len(optimized_matches) == match_limit):
+          return optimized_matches
 
   return optimized_matches
 
+def get_match_limit(matches):
+  division_player_count = len(get_players(matches)) / 2
+  team_size = 2
+  match_limit = math.factorial(division_player_count) / \
+                (math.factorial(team_size) * math.factorial(division_player_count - team_size))
+  return match_limit
+
+
 def get_player_game_limit(matches):
+  return (len(get_players(matches)) / 2) - 1
+
+def get_players(matches):
   players = []
 
   for match in  matches:
     for team in match.teams:
       for player in team.players:
-        players.append(player)
+        if(player not in players):
+          players.append(player)
 
-  return (len(players) / 2) - 1
+  return players
 
 def get_player_game_counts(matches):
   player_game_counts = {}
@@ -39,12 +54,10 @@ def get_player_game_counts(matches):
   return player_game_counts
 
 def is_current_skill_diff(match, current_skill_difference):
-  return match.get_skill_difference() == current_skill_difference
+  return math.fabs(match.get_skill_difference()) == current_skill_difference
 
-def is_eligible_optimized_match(optimized_matches, match, current_skill_difference, player_game_counts):
-  return match.get_skill_difference() == current_skill_difference \
-         and is_unique_match(optimized_matches, match) \
-         and players_not_over_assigned(match)
+def is_unique_match(matches, match):
+  return match not in matches
 
 def players_not_over_assigned(match, player_game_counts, player_game_limit):
   for team in match.teams:
@@ -54,9 +67,7 @@ def players_not_over_assigned(match, player_game_counts, player_game_limit):
 
   return True
 
-def is_unique_match(matches, new_match):
-  for match in matches:
-    if(new_match.get_id() == match.get_id()):
-      return False
-
-  return True
+def increment_game_counts(match, player_game_counts):
+  for team in match.teams:
+    for player in team.players:
+      player_game_counts[player.name] += 1

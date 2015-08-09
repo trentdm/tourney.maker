@@ -6,8 +6,7 @@ from tournament import Match
 def get_tournament_matches(roster):
   teams = get_teams(roster)
   matches = get_matches(teams)
-  optimized_matches = optimizer.get_optimized_matches(matches)
-  return optimized_matches
+  return optimizer.get_optimized_matches(matches)
 
 def get_teams(roster):
   teams = []
