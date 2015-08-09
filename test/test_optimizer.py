@@ -1,6 +1,6 @@
 import unittest
-import optimizer
-import matcher
+from optimizer import Optimizer
+from matchmaker import Matchmaker
 from roster import Roster
 
 class TestOptimizer(unittest.TestCase):
@@ -24,18 +24,20 @@ class TestOptimizer(unittest.TestCase):
                     ]
                   }
     roster = Roster(roster_data)
-    teams = matcher.get_teams(roster)
-    self.matches = matcher.get_matches(teams)
+    matchmaker = Matchmaker()
+    teams = matchmaker.get_teams(roster)
+    matches = matchmaker.get_matches(teams)
+    self.optimizer = Optimizer(matches)
 
   def tearDown(self):
     self.matches = None
 
   def test_matches_count(self):
-    optimized_matches = optimizer.get_optimized_matches(self.matches)
+    optimized_matches = self.optimizer.get_optimized_matches()
     self.assertEqual(21, len(optimized_matches))
 
   def test_match_skill_difference(self):
-    optimized_matches = optimizer.get_optimized_matches(self.matches)
+    optimized_matches = self.optimizer.get_optimized_matches()
 
     for match in optimized_matches:
       self.assertEqual(0, match.get_skill_difference())

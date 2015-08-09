@@ -1,5 +1,5 @@
 import unittest
-import matcher
+from matchmaker import Matchmaker
 from roster import Roster
 
 class TestMatcher(unittest.TestCase):
@@ -23,9 +23,10 @@ class TestMatcher(unittest.TestCase):
                     ]
                   }
     roster = Roster(roster_data)
-    self.teams = matcher.get_teams(roster)
-    self.matches = matcher.get_matches(self.teams)
-    self.optimized_matches = matcher.get_tournament_matches(roster)
+    self.matchmaker = Matchmaker()
+    self.teams = self.matchmaker.get_teams(roster)
+    self.matches = self.matchmaker.get_matches(self.teams)
+    self.optimized_matches = self.matchmaker.get_tournament_matches(roster)
 
   def tearDown(self):
     self.tourney = None
