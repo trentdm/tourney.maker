@@ -2,7 +2,7 @@ import unittest
 from matchmaker import Matchmaker
 from roster import Roster
 
-class TestMatcher(unittest.TestCase):
+class TestMatchmaker(unittest.TestCase):
   def setUp(self):
     roster_data = {
                     "players" : [
@@ -41,4 +41,4 @@ class TestMatcher(unittest.TestCase):
     self.assertEqual(21, len(self.optimized_matches))
 
   def test_tourney_has_match(self):
-    self.assertEqual("Bill SchaefermeyerJames MorrisKalpesh ShahLarry Ward", self.matches[0].id)
+    self.assertEqual("Bill Schaefermeyer James Morris,Kalpesh Shah Larry Ward", self.matches[0].id)

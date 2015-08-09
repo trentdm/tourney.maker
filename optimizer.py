@@ -53,7 +53,7 @@ class Optimizer(object):
           if(len(optimized_matches) == self.match_limit):
             return optimized_matches
 
-    print self.player_game_counts
+    # print self.player_game_counts
     return optimized_matches
 
   def is_skill_match(self, match, current_skill_difference):

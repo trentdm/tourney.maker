@@ -10,7 +10,7 @@ class Team(object):
 
   def set_id(self):
     sorted_players = sorted(self.players, key=lambda player: player.name)
-    self.id = ''.join([player.name for player in sorted_players])
+    self.id = ' '.join([player.name for player in sorted_players])
 
   def set_skill(self):
     self.skill = sum([player.skill for player in self.players])
