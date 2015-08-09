@@ -1,9 +1,9 @@
 import unittest
-import reader
+import roster_file_importer
 
-class TestRead(unittest.TestCase):
+class TestRosterFileImporter(unittest.TestCase):
   def setUp(self):
-    self.roster = reader.get_roster('resources/test_data.json')
+    self.roster = roster_file_importer.get_roster('resources/test_data.json')
 
   def tearDown(self):
     self.roster = None

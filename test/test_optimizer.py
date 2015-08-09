@@ -1,8 +1,13 @@
 import unittest
+import optimizer
+import random
 import matcher
 from roster import Roster
+from tournament import Match
+from tournament import Team
+from player import Player
 
-class TestMatcher(unittest.TestCase):
+class TestOptimizer(unittest.TestCase):
   def setUp(self):
     roster_data = {
                     "players" : [
@@ -23,13 +28,11 @@ class TestMatcher(unittest.TestCase):
                     ]
                   }
     roster = Roster(roster_data)
-    self.matches = matcher.get_tournament_matches(roster)
+    matches = matcher.get_tournament_matches(roster)
+    self.matches = optimizer.get_optimized_matches(matches)
 
   def tearDown(self):
-    self.tourney = None
+    self.roster = None
 
-  def test_match_count(self):
+  def test_matches_count(self):
     self.assertEqual(21, len(self.matches))
-
-  def test_tourney_has_match(self):
-    self.assertEqual("fooId", self.matches[0].id)
